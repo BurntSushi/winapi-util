@@ -15,8 +15,12 @@ categories = ["os::windows-apis", "external-ffi-bindings"]
 version = "0.3"
 features = [
   "std",
+  "consoleapi",
+  "errhandlingapi",
   "fileapi",
   "minwindef",
   "processenv",
   "winbase",
+  "wincon",
+  "winerror",
 ]

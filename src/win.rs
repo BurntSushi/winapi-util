@@ -186,6 +186,12 @@ pub trait AsHandleRef {
     }
 }
 
+impl<'a, T: AsHandleRef> AsHandleRef for &'a T {
+    fn as_handle_ref(&self) -> HandleRef {
+        (**self).as_handle_ref()
+    }
+}
+
 impl AsHandleRef for Handle {
     fn as_handle_ref(&self) -> HandleRef {
         unsafe { HandleRef::from_raw_handle(self.as_raw_handle()) }

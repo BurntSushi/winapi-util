@@ -8,6 +8,7 @@ use winapi::um::fileapi::{
     BY_HANDLE_FILE_INFORMATION,
     GetFileInformationByHandle, GetFileType,
 };
+use winapi::um::winnt;
 
 use AsHandleRef;
 
@@ -49,6 +50,12 @@ pub fn typ<H: AsHandleRef>(h: H) -> io::Result<Type> {
     }
 }
 
+/// Returns true if and only if the given file attributes contain the
+/// `FILE_ATTRIBUTE_HIDDEN` attribute.
+pub fn is_hidden(file_attributes: u64) -> bool {
+    file_attributes & (winnt::FILE_ATTRIBUTE_HIDDEN as u64) > 0
+}
+
 /// Represents file information such as creation time, file size, etc.
 ///
 /// This wraps a [`BY_HANDLE_FILE_INFORMATION`].
@@ -63,6 +70,12 @@ impl Information {
     /// This corresponds to `dwFileAttributes`.
     pub fn file_attributes(&self) -> u64 {
         self.0.dwFileAttributes as u64
+    }
+
+    /// Returns true if and only if this file information has the
+    /// `FILE_ATTRIBUTE_HIDDEN` attribute.
+    pub fn is_hidden(&self) -> bool {
+        is_hidden(self.file_attributes())
     }
 
     /// Return the creation time, if one exists.

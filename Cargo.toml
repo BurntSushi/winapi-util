@@ -23,4 +23,5 @@ features = [
   "winbase",
   "wincon",
   "winerror",
+  "winnt",
 ]

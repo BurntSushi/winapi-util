@@ -38,7 +38,7 @@ ffi utility bindings in a variety of crates in order to get Windows support.
 Eventually, I started needing to copy & paste a lot of those utility routines.
 Since they are utility routines, they often don't make sense to expose directly
 in the crate in which they are defined. Instead of continuing this process,
-I decide to make a crate instead.
+I decided to make a crate instead.
 
 Normally, I'm not a huge fan of "utility" crates like this that don't have a
 well defined scope, but this is primarily a practical endeavor to make it

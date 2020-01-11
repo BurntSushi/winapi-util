@@ -7,7 +7,7 @@ use winapi::um::wincon::{
     GetConsoleScreenBufferInfo, SetConsoleTextAttribute,
 };
 
-use AsHandleRef;
+use crate::AsHandleRef;
 
 /// Query the given handle for information about the console's screen buffer.
 ///

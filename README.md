@@ -3,8 +3,7 @@ winapi-util
 This crate provides a smattering of safe wrappers around various parts of the
 [winapi](https://crates.io/crates/winapi) crate.
 
-[![Linux build status](https://api.travis-ci.org/BurntSushi/winapi-util.png)](https://travis-ci.org/BurntSushi/winapi-util)
-[![Windows build status](https://ci.appveyor.com/api/projects/status/github/BurntSushi/winapi-util?svg=true)](https://ci.appveyor.com/project/BurntSushi/winapi-util)
+[![Build status](https://github.com/BurntSushi/winapi-util/workflows/ci/badge.svg)](https://github.com/BurntSushi/winapi-util/actions)
 [![](http://meritbadge.herokuapp.com/winapi-util)](https://crates.io/crates/winapi-util)
 
 Dual-licensed under MIT or the [UNLICENSE](http://unlicense.org).

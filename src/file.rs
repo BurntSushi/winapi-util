@@ -10,7 +10,7 @@ use winapi::um::fileapi::{
 };
 use winapi::um::winnt;
 
-use AsHandleRef;
+use crate::AsHandleRef;
 
 /// Return various pieces of information about a file.
 ///

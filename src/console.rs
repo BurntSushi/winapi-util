@@ -7,7 +7,7 @@ use winapi::um::wincon::{
     self, GetConsoleScreenBufferInfo, SetConsoleTextAttribute,
     CONSOLE_SCREEN_BUFFER_INFO, FOREGROUND_BLUE as FG_BLUE,
     FOREGROUND_GREEN as FG_GREEN, FOREGROUND_INTENSITY as FG_INTENSITY,
-    FOREGROUND_RED as FG_RED,
+    FOREGROUND_RED as FG_RED, SMALL_RECT,
 };
 
 use crate::{AsHandleRef, HandleRef};
@@ -125,6 +125,14 @@ impl ScreenBufferInfo {
     /// size.
     pub fn max_window_size(&self) -> (i16, i16) {
         (self.0.dwMaximumWindowSize.X, self.0.dwMaximumWindowSize.Y)
+    }
+
+    /// Returns the console screen buffer coordinates of the upper-left and
+    /// lower-right corners of the display window.
+    ///
+    /// This corresponds to `srWindow`.
+    pub fn window_rect(&self) -> SMALL_RECT {
+        self.0.srWindow
     }
 }
 

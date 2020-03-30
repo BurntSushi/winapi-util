@@ -126,6 +126,31 @@ impl ScreenBufferInfo {
     pub fn max_window_size(&self) -> (i16, i16) {
         (self.0.dwMaximumWindowSize.X, self.0.dwMaximumWindowSize.Y)
     }
+
+    /// Returns the console screen buffer coordinates of the upper-left and
+    /// lower-right corners of the display window.
+    ///
+    /// This corresponds to `srWindow`.
+    pub fn window_rect(&self) -> SmallRect {
+        SmallRect {
+            left: self.0.srWindow.Left,
+            top: self.0.srWindow.Top,
+            right: self.0.srWindow.Right,
+            bottom: self.0.srWindow.Bottom,
+        }
+    }
+}
+
+/// Defines the coordinates of the upper left and lower right corners of a rectangle.
+///
+/// This corresponds to [`SMALL_RECT`].
+///
+/// [`SMALL_RECT`]: https://docs.microsoft.com/en-us/windows/console/small-rect-str
+pub struct SmallRect {
+    pub left: i16,
+    pub top: i16,
+    pub right: i16,
+    pub bottom: i16,
 }
 
 /// A Windows console.

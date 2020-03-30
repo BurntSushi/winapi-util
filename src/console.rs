@@ -7,7 +7,7 @@ use winapi::um::wincon::{
     self, GetConsoleScreenBufferInfo, SetConsoleTextAttribute,
     CONSOLE_SCREEN_BUFFER_INFO, FOREGROUND_BLUE as FG_BLUE,
     FOREGROUND_GREEN as FG_GREEN, FOREGROUND_INTENSITY as FG_INTENSITY,
-    FOREGROUND_RED as FG_RED, SMALL_RECT,
+    FOREGROUND_RED as FG_RED,
 };
 
 use crate::{AsHandleRef, HandleRef};
@@ -131,9 +131,26 @@ impl ScreenBufferInfo {
     /// lower-right corners of the display window.
     ///
     /// This corresponds to `srWindow`.
-    pub fn window_rect(&self) -> SMALL_RECT {
-        self.0.srWindow
+    pub fn window_rect(&self) -> SmallRect {
+        SmallRect {
+            left: self.0.srWindow.Left,
+            top: self.0.srWindow.Top,
+            right: self.0.srWindow.Right,
+            bottom: self.0.srWindow.Bottom,
+        }
     }
+}
+
+/// Defines the coordinates of the upper left and lower right corners of a rectangle.
+///
+/// This corresponds to [`SMALL_RECT`].
+///
+/// [`SMALL_RECT`]: https://docs.microsoft.com/en-us/windows/console/small-rect-str
+pub struct SmallRect {
+    pub left: i16,
+    pub top: i16,
+    pub right: i16,
+    pub bottom: i16,
 }
 
 /// A Windows console.

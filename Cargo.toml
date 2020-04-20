@@ -26,3 +26,6 @@ features = [
   "winerror",
   "winnt",
 ]
+
+[package.metadata.docs.rs]
+targets = ["x86_64-pc-windows-msvc"]

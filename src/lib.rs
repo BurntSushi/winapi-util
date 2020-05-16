@@ -29,4 +29,6 @@ pub mod console;
 #[cfg(windows)]
 pub mod file;
 #[cfg(windows)]
+pub mod socket;
+#[cfg(windows)]
 mod win;

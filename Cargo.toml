@@ -25,6 +25,7 @@ features = [
   "wincon",
   "winerror",
   "winnt",
+  "winsock2",
 ]
 
 [package.metadata.docs.rs]

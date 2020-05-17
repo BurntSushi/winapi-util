@@ -2,22 +2,10 @@ use std::convert::TryInto;
 use std::io;
 
 use winapi::shared::minwindef::INT;
-use winapi::um::{winnt::SHORT, winsock2};
+use winapi::um::winsock2::{WSAPoll, WSAPOLLFD};
 
-pub const POLLRDNORM: SHORT = winsock2::POLLRDNORM;
-pub const POLLRDBAND: SHORT = winsock2::POLLRDBAND;
-pub const POLLIN: SHORT = winsock2::POLLIN;
-pub const POLLPRI: SHORT = winsock2::POLLPRI;
-pub const POLLWRNORM: SHORT = winsock2::POLLWRNORM;
-pub const POLLOUT: SHORT = winsock2::POLLOUT;
-pub const POLLWRBAND: SHORT = winsock2::POLLWRBAND;
-pub const POLLERR: SHORT = winsock2::POLLERR;
-pub const POLLHUP: SHORT = winsock2::POLLHUP;
-pub const POLLNVAL: SHORT = winsock2::POLLNVAL;
-
-pub use winsock2::WSAPOLLFD;
-
-/// `wsa_poll` waits for one of a set of file descriptors to become ready to perform I/O.
+/// `wsa_poll` waits for one of a set of file descriptors to become ready to
+/// perform I/O.
 ///
 /// This corresponds to calling [`WSAPoll`].
 ///
@@ -28,10 +16,56 @@ pub fn wsa_poll(
 ) -> io::Result<usize> {
     unsafe {
         let length = fd_array.len().try_into().unwrap();
-        let rc = winsock2::WSAPoll(fd_array.as_mut_ptr(), length, timeout);
+        let rc = WSAPoll(fd_array.as_mut_ptr(), length, timeout);
         if rc < 0 {
             return Err(io::Error::last_os_error());
         };
         Ok(rc.try_into().unwrap())
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use std::io::{Result, Write};
+    use std::net::{TcpListener, TcpStream};
+    use std::os::windows::io::{AsRawSocket, RawSocket};
+
+    use winapi::um::winnt::SHORT;
+    use winapi::um::winsock2::{POLLIN, POLLOUT, POLLRDNORM, WSAPOLLFD};
+
+    use super::wsa_poll;
+
+    /// Get a pair of connected TcpStreams
+    fn get_connection_pair() -> Result<(TcpStream, TcpStream)> {
+        let listener = TcpListener::bind("127.0.0.1:0")?;
+        let stream1 = TcpStream::connect(listener.local_addr()?)?;
+        let stream2 = listener.accept()?.0;
+
+        Ok((stream1, stream2))
+    }
+
+    fn poll(socket: RawSocket, events: SHORT, revents: SHORT) -> Result<()> {
+        let mut sockets = [WSAPOLLFD { fd: socket as _, events, revents: 0 }];
+        let count = wsa_poll(&mut sockets, -1)?;
+        assert_eq!(count, 1);
+        assert_eq!(sockets[0].revents, revents);
+
+        Ok(())
+    }
+
+    #[test]
+    fn test_poll() -> Result<()> {
+        let (mut stream1, stream2) = get_connection_pair()?;
+
+        // Check that stream1 is writable
+        poll(stream1.as_raw_socket(), POLLOUT, POLLOUT)?;
+
+        // Write something to the stream
+        stream1.write_all(b"1")?;
+
+        // stream2 should now be readable and writable
+        poll(stream2.as_raw_socket(), POLLIN | POLLOUT, POLLOUT | POLLRDNORM)?;
+
+        Ok(())
     }
 }

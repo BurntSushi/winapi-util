@@ -30,3 +30,6 @@ pub mod console;
 pub mod file;
 #[cfg(windows)]
 mod win;
+/// Semi-safe routines for dealing with networking (currently mainly HTTP requests) on Windows.
+#[cfg(windows)]
+pub mod wininet;

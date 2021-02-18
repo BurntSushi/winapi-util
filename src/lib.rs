@@ -29,4 +29,6 @@ pub mod console;
 #[cfg(windows)]
 pub mod file;
 #[cfg(windows)]
+pub mod time;
+#[cfg(windows)]
 mod win;

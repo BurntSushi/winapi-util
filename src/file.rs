@@ -99,8 +99,8 @@ impl Information {
     /// Return the serial number of the volume that the file is on.
     ///
     /// This corresponds to `dwVolumeSerialNumber`.
-    pub fn volume_serial_number(&self) -> u64 {
-        self.0.dwVolumeSerialNumber as u64
+    pub fn volume_serial_number(&self) -> u32 {
+        self.0.dwVolumeSerialNumber
     }
 
     /// Return the file size, in bytes.
@@ -113,8 +113,8 @@ impl Information {
     /// Return the number of links to this file.
     ///
     /// This corresponds to `nNumberOfLinks`.
-    pub fn number_of_links(&self) -> u64 {
-        self.0.nNumberOfLinks as u64
+    pub fn number_of_links(&self) -> u32 {
+        self.0.nNumberOfLinks
     }
 
     /// Return the index of this file. The index of a file is a purpotedly

@@ -21,6 +21,7 @@ features = [
   "fileapi",
   "minwindef",
   "processenv",
+  "profileapi",
   "winbase",
   "wincon",
   "winerror",

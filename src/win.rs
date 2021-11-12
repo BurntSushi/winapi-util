@@ -5,6 +5,7 @@ use std::os::windows::io::{
 };
 use std::path::Path;
 use std::process;
+use winapi::um::handleapi::INVALID_HANDLE_VALUE;
 
 /// A handle represents an owned and valid Windows handle to a file-like
 /// object.
@@ -117,26 +118,37 @@ impl Clone for HandleRef {
     }
 }
 
+/// Ensures the handle is never null by converting null values to the
+/// pseudo-handle `INVALID_HANDLE_VALUE`.
+fn nonnull_handle<T: AsRawHandle>(stdio: T) -> RawHandle {
+    let handle = stdio.as_raw_handle();
+    if handle.is_null() {
+        INVALID_HANDLE_VALUE
+    } else {
+        handle
+    }
+}
+
 impl HandleRef {
     /// Create a borrowed handle to stdin.
     ///
     /// When the returned handle is dropped, stdin is not closed.
     pub fn stdin() -> HandleRef {
-        unsafe { HandleRef::from_raw_handle(io::stdin().as_raw_handle()) }
+        unsafe { HandleRef::from_raw_handle(nonnull_handle(io::stdin())) }
     }
 
     /// Create a handle to stdout.
     ///
     /// When the returned handle is dropped, stdout is not closed.
     pub fn stdout() -> HandleRef {
-        unsafe { HandleRef::from_raw_handle(io::stdout().as_raw_handle()) }
+        unsafe { HandleRef::from_raw_handle(nonnull_handle(io::stdout())) }
     }
 
     /// Create a handle to stderr.
     ///
     /// When the returned handle is dropped, stderr is not closed.
     pub fn stderr() -> HandleRef {
-        unsafe { HandleRef::from_raw_handle(io::stderr().as_raw_handle()) }
+        unsafe { HandleRef::from_raw_handle(nonnull_handle(io::stderr())) }
     }
 
     /// Create a borrowed handle to the given file.

@@ -19,6 +19,7 @@ features = [
   "consoleapi",
   "errhandlingapi",
   "fileapi",
+  "handleapi",
   "minwindef",
   "processenv",
   "winbase",

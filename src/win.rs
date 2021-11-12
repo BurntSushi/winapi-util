@@ -133,6 +133,15 @@ impl HandleRef {
     /// Create a borrowed handle to stdin.
     ///
     /// When the returned handle is dropped, stdin is not closed.
+    ///
+    /// If there is no stdin handle then `INVALID_HANDLE_VALUE` will be used
+    /// as the underlying file handle. This is likely to cause any use of the
+    /// handle to fail.
+    ///
+    /// The handle will most commonly be missing in GUI applications using the
+    /// ["windows" subsystem][subsystem].
+    ///
+    /// [subsystem]: https://doc.rust-lang.org/reference/runtime.html?#the-windows_subsystem-attribute
     pub fn stdin() -> HandleRef {
         unsafe { HandleRef::from_raw_handle(nonnull_handle(io::stdin())) }
     }
@@ -140,6 +149,15 @@ impl HandleRef {
     /// Create a handle to stdout.
     ///
     /// When the returned handle is dropped, stdout is not closed.
+    ///
+    /// If there is no stdout handle then `INVALID_HANDLE_VALUE` will be used
+    /// as the underlying file handle. This is likely to cause any use of the
+    /// handle to fail.
+    ///
+    /// The handle will most commonly be missing in GUI applications using the
+    /// ["windows" subsystem][subsystem].
+    ///
+    /// [subsystem]: https://doc.rust-lang.org/reference/runtime.html?#the-windows_subsystem-attribute
     pub fn stdout() -> HandleRef {
         unsafe { HandleRef::from_raw_handle(nonnull_handle(io::stdout())) }
     }
@@ -147,6 +165,15 @@ impl HandleRef {
     /// Create a handle to stderr.
     ///
     /// When the returned handle is dropped, stderr is not closed.
+    ///
+    /// If there is no stderr handle then `INVALID_HANDLE_VALUE` will be used
+    /// as the underlying file handle. This is likely to cause any use of the
+    /// handle to fail.
+    ///
+    /// The handle will most commonly be missing in GUI applications using the
+    /// ["windows" subsystem][subsystem].
+    ///
+    /// [subsystem]: https://doc.rust-lang.org/reference/runtime.html?#the-windows_subsystem-attribute
     pub fn stderr() -> HandleRef {
         unsafe { HandleRef::from_raw_handle(nonnull_handle(io::stderr())) }
     }

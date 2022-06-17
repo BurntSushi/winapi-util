@@ -1,7 +1,7 @@
 winapi-util
 ===========
 This crate provides a smattering of safe wrappers around various parts of the
-[winapi](https://crates.io/crates/winapi) crate.
+[windows-sys](https://crates.io/crates/windows-sys) crate.
 
 [![Build status](https://github.com/BurntSushi/winapi-util/workflows/ci/badge.svg)](https://github.com/BurntSushi/winapi-util/actions)
 [![](http://meritbadge.herokuapp.com/winapi-util)](https://crates.io/crates/winapi-util)

@@ -4,7 +4,7 @@ This crate provides a smattering of safe wrappers around various parts of the
 [winapi](https://crates.io/crates/winapi) crate.
 
 [![Build status](https://github.com/BurntSushi/winapi-util/workflows/ci/badge.svg)](https://github.com/BurntSushi/winapi-util/actions)
-[![Crates.io](https://img.shields.io/crates/v/winapi-util.svg)](https://crates.io/crates/winapi-util)
+[![crates.io](https://img.shields.io/crates/v/winapi-util.svg)](https://crates.io/crates/winapi-util)
 
 Dual-licensed under MIT or the [UNLICENSE](https://unlicense.org/).
 

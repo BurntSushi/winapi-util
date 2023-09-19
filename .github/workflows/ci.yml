@@ -39,7 +39,7 @@ jobs:
         include:
         - build: pinned
           os: windows-latest
-          rust: 1.34.0
+          rust: 1.72.0
         - build: stable
           os: windows-latest
           rust: stable

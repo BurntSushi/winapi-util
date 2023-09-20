@@ -8,7 +8,7 @@ homepage = "https://github.com/BurntSushi/winapi-util"
 repository = "https://github.com/BurntSushi/winapi-util"
 readme = "README.md"
 keywords = ["windows", "winapi", "util", "win"]
-license = "Unlicense/MIT"
+license = "Unlicense OR MIT"
 categories = ["os::windows-apis", "external-ffi-bindings"]
 edition = "2021"
 

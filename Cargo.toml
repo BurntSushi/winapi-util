@@ -12,6 +12,9 @@ license = "Unlicense/MIT"
 categories = ["os::windows-apis", "external-ffi-bindings"]
 edition = "2021"
 
+[target.'cfg(windows)'.dependencies]
+widestring = "0.4.3"
+
 [target.'cfg(windows)'.dependencies.winapi]
 version = "0.3"
 features = [
@@ -25,6 +28,7 @@ features = [
   "winbase",
   "wincon",
   "winerror",
+  "wininet",
   "winnt",
 ]
 

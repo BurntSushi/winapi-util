@@ -13,7 +13,7 @@ categories = ["os::windows-apis", "external-ffi-bindings"]
 edition = "2021"
 
 [target.'cfg(windows)'.dependencies.windows-sys]
-version = "0.52.0"
+version = ">=0.48.0, <=0.59.*"
 features = [
   "Win32_Foundation",
   "Win32_Storage_FileSystem",

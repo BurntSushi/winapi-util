@@ -1,6 +1,6 @@
 [package]
 name = "winapi-util"
-version = "0.1.9"  #:version
+version = "0.1.10"  #:version
 authors = ["Andrew Gallant <jamslam@gmail.com>"]
 description = "A dumping ground for high level safe wrappers over windows-sys."
 documentation = "https://docs.rs/winapi-util"

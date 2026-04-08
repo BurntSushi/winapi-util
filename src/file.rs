@@ -115,7 +115,7 @@ impl Information {
         self.0.nNumberOfLinks as u64
     }
 
-    /// Return the index of this file. The index of a file is a purpotedly
+    /// Return the index of this file. The index of a file is a purportedly
     /// unique identifier for a file within a particular volume.
     pub fn file_index(&self) -> u64 {
         ((self.0.nFileIndexHigh as u64) << 32) | (self.0.nFileIndexLow as u64)

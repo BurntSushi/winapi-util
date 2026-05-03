@@ -85,3 +85,23 @@ jobs:
     - name: Check formatting
       run: |
         cargo fmt --all -- --check
+
+  windows-sys:
+    name: check windows bindings
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: stable
+      - name: Check if the windows bindings need regenerating
+        run: |
+          cargo run -p generate-windows-bindings
+          if [ "$(git status --porcelain=v1 | wc -l)" -gt 0 ]; then
+            echo "the windows bindings need regenerating"
+            echo "use the following command to update them:"
+            echo "    cargo run -p generate-windows-bindings"
+            exit 1
+          fi

@@ -33,3 +33,6 @@ pub mod file;
 pub mod sysinfo;
 #[cfg(windows)]
 mod win;
+
+#[cfg(windows)]
+mod windows_sys;

@@ -1,11 +1,10 @@
 use std::{io, mem};
 
-use windows_sys::Win32::Foundation::HANDLE;
-use windows_sys::Win32::System::Console::{GetConsoleMode, SetConsoleMode};
-use windows_sys::Win32::System::Console::{
-    GetConsoleScreenBufferInfo, SetConsoleTextAttribute,
-    CONSOLE_SCREEN_BUFFER_INFO, ENABLE_VIRTUAL_TERMINAL_PROCESSING,
-    FOREGROUND_BLUE, FOREGROUND_GREEN, FOREGROUND_INTENSITY, FOREGROUND_RED,
+use crate::windows_sys::{
+    GetConsoleMode, GetConsoleScreenBufferInfo, SetConsoleMode,
+    SetConsoleTextAttribute, CONSOLE_SCREEN_BUFFER_INFO,
+    ENABLE_VIRTUAL_TERMINAL_PROCESSING, FOREGROUND_BLUE, FOREGROUND_GREEN,
+    FOREGROUND_INTENSITY, FOREGROUND_RED, HANDLE,
 };
 
 use crate::{AsHandleRef, HandleRef};

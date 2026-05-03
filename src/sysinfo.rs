@@ -1,8 +1,6 @@
 use std::{ffi::OsString, io};
 
-use windows_sys::Win32::System::SystemInformation::{
-    GetComputerNameExW, COMPUTER_NAME_FORMAT,
-};
+use crate::windows_sys::{GetComputerNameExW, COMPUTER_NAME_FORMAT};
 
 /// The type of name to be retrieved by [`get_computer_name`].
 #[derive(Clone, Copy, Debug)]
@@ -51,25 +49,21 @@ pub enum ComputerNameKind {
 impl ComputerNameKind {
     fn to_format(&self) -> COMPUTER_NAME_FORMAT {
         use self::ComputerNameKind::*;
-        use windows_sys::Win32::System::SystemInformation;
+        use crate::windows_sys;
 
         match *self {
-            DnsDomain => SystemInformation::ComputerNameDnsDomain,
-            DnsFullyQualified => {
-                SystemInformation::ComputerNameDnsFullyQualified
-            }
-            DnsHostname => SystemInformation::ComputerNameDnsHostname,
-            NetBios => SystemInformation::ComputerNameNetBIOS,
-            PhysicalDnsDomain => {
-                SystemInformation::ComputerNamePhysicalDnsDomain
-            }
+            DnsDomain => windows_sys::ComputerNameDnsDomain,
+            DnsFullyQualified => windows_sys::ComputerNameDnsFullyQualified,
+            DnsHostname => windows_sys::ComputerNameDnsHostname,
+            NetBios => windows_sys::ComputerNameNetBIOS,
+            PhysicalDnsDomain => windows_sys::ComputerNamePhysicalDnsDomain,
             PhysicalDnsFullyQualified => {
-                SystemInformation::ComputerNamePhysicalDnsFullyQualified
+                windows_sys::ComputerNamePhysicalDnsFullyQualified
             }
             PhysicalDnsHostname => {
-                SystemInformation::ComputerNamePhysicalDnsHostname
+                windows_sys::ComputerNamePhysicalDnsHostname
             }
-            PhysicalNetBios => SystemInformation::ComputerNamePhysicalNetBIOS,
+            PhysicalNetBios => windows_sys::ComputerNamePhysicalNetBIOS,
         }
     }
 }

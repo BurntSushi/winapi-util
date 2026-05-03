@@ -64,9 +64,9 @@ impl Handle {
     /// If you use `from_path` on a directory, then subsequent queries using
     /// that handle will fail.
     pub fn from_path_any<P: AsRef<Path>>(path: P) -> io::Result<Handle> {
+        use crate::windows_sys::FILE_FLAG_BACKUP_SEMANTICS;
         use std::fs::OpenOptions;
         use std::os::windows::fs::OpenOptionsExt;
-        use windows_sys::Win32::Storage::FileSystem::FILE_FLAG_BACKUP_SEMANTICS;
 
         let file = OpenOptions::new()
             .read(true)

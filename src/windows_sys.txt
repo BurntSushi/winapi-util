@@ -1,0 +1,35 @@
+// This file contains the names of Windows API types and functions we need to generate.
+// See generate-windows-bindings/README.md
+BY_HANDLE_FILE_INFORMATION
+COMPUTER_NAME_FORMAT
+CONSOLE_SCREEN_BUFFER_INFO
+ComputerNameDnsDomain
+ComputerNameDnsFullyQualified
+ComputerNameDnsHostname
+ComputerNameNetBIOS
+ComputerNamePhysicalDnsDomain
+ComputerNamePhysicalDnsFullyQualified
+ComputerNamePhysicalDnsHostname
+ComputerNamePhysicalNetBIOS
+ENABLE_VIRTUAL_TERMINAL_PROCESSING
+FILETIME
+FILE_ATTRIBUTE_HIDDEN
+FILE_FLAG_BACKUP_SEMANTICS
+FILE_TYPE_CHAR
+FILE_TYPE_DISK
+FILE_TYPE_PIPE
+FILE_TYPE_UNKNOWN
+FOREGROUND_BLUE
+FOREGROUND_GREEN
+FOREGROUND_INTENSITY
+FOREGROUND_RED
+GetComputerNameExW
+GetConsoleMode
+GetConsoleScreenBufferInfo
+GetFileInformationByHandle
+GetFileType
+GetLastError
+HANDLE
+NO_ERROR
+SetConsoleMode
+SetConsoleTextAttribute
